@@ -58,10 +58,19 @@ def check_winner():
         return False
     
 def empty_spaces():
-    pass
+    for row in buttons:
+        for button in row:
+            if button['text']=="":
+                return True
+    return False
 
 def new_game():
-    pass
+    global player
+    player=random.choice(Players)
+    label.config(text = player+" turn")
+    for row in buttons:
+        for button in row:
+            button.config(text="")
 
 window = Tk()
 window.title ( "TIC-TAC-TOE")
@@ -82,7 +91,7 @@ frame.pack()
 
 for i in range(3):
     for j in range(3):
-        buttons[i][j] = Button(frame,text ="O",font=('consolas',20),width = 5,height=2, 
+        buttons[i][j] = Button(frame,text ="",font=('consolas',20),width = 5,height=2, 
                               command = lambda row =i ,column = j : next_turn(row,column)  )
         buttons[i][j].grid(row= i , column = j)
 window.mainloop()
